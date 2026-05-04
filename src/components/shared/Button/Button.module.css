@@ -1,0 +1,18 @@
+.btn {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  padding: 14px 28px;
+  background: var(--accent);
+  color: #000;
+  font-weight: 500;
+  text-decoration: none;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.btn:hover {
+  background: #00dfc0;
+  transform: translateY(-2px);
+}

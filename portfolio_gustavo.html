@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gustavo Brito – Engenheiro Mecânico HVAC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+
+  <style>
+    /* ─── VARIÁVEIS DE COR ───────────────────────────────
+       Pense nisto como a "paleta" do projeto.
+       Ao mudar aqui, muda em TODO o site de uma vez. */
+    :root {
+      --bg:        #0d0f14;
+      --surface:   #161a22;
+      --border:    #242936;
+      --accent:    #00c2a8;   /* verde-água técnico */
+      --accent2:   #ff6b35;   /* laranja engenharia */
+      --text:      #e8eaf0;
+      --muted:     #7a8099;
+      --font-head: 'Bebas Neue', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+      --font-mono: 'DM Mono', monospace;
+    }
+
+    /* ─── RESET BÁSICO ───────────────────────────────────
+       Remove margens e paddings que o navegador coloca
+       por padrão em todos os elementos. */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ─── GRID DE FUNDO (efeito técnico) ─────────────────
+       Cria aquelas linhas de grade que você vê atrás do
+       conteúdo — dá cara de planta técnica / blueprint. */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── LAYOUT PRINCIPAL ───────────────────────────────
+       max-width centraliza o conteúdo em telas largas.
+       padding garante espaço nas laterais em celular. */
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ══════════════════════════════════════════════════
+       HEADER / HERO — A primeira coisa que o visitante vê
+    ══════════════════════════════════════════════════ */
+    header {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 80px 0 60px;
+      position: relative;
+    }
+
+    /* Linha de destaque vertical à esquerda */
+    .hero-inner {
+      border-left: 3px solid var(--accent);
+      padding-left: 32px;
+    }
+
+    .hero-tag {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--accent);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-tag::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    /* Bebas Neue em tamanho grande = impacto imediato */
+    h1 {
+      font-family: var(--font-head);
+      font-size: clamp(52px, 9vw, 96px); /* clamp = tamanho responsivo */
+      line-height: 0.95;
+      letter-spacing: 2px;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-head);
+      font-size: clamp(28px, 5vw, 52px);
+      color: var(--accent);
+      letter-spacing: 4px;
+      margin-bottom: 28px;
+    }
+
+    .hero-desc {
+      max-width: 560px;
+      color: var(--muted);
+      font-size: 16px;
+      margin-bottom: 40px;
+    }
+
+    /* Badges de tecnologia */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 5px 12px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 2px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: all 0.2s;
+    }
+    .tag:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Botão de contato */
+    .btn {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      padding: 14px 28px;
+      background: var(--accent);
+      color: #000;
+      font-weight: 500;
+      text-decoration: none;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn:hover { background: #00dfc0; transform: translateY(-2px); }
+
+    /* Número de anos de experiência — canto direito */
+    .hero-stat {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%) rotate(90deg);
+      transform-origin: center center;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    /* ══════════════════════════════════════════════════
+       SEÇÕES GENÉRICAS
+    ══════════════════════════════════════════════════ */
+    section {
+      padding: 80px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-family: var(--font-head);
+      font-size: clamp(36px, 5vw, 56px);
+      letter-spacing: 2px;
+      color: #fff;
+      margin-bottom: 48px;
+      line-height: 1;
+    }
+
+    /* ══════════════════════════════════════════════════
+       SOBRE — Dois números grandes + texto
+    ══════════════════════════════════════════════════ */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    /* Em telas pequenas (celular), empilha verticalmente */
+    @media (max-width: 640px) {
+      .about-grid { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    .about-text p { color: var(--muted); margin-bottom: 16px; }
+    .about-text strong { color: var(--text); }
+
+    .stats {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .stat-item {
+      padding: 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent2);
+    }
+    .stat-num {
+      font-family: var(--font-head);
+      font-size: 64px;
+      color: var(--accent2);
+      line-height: 1;
+      letter-spacing: 2px;
+    }
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* ══════════════════════════════════════════════════
+       EXPERIÊNCIA — Linha do tempo
+    ══════════════════════════════════════════════════ */
+    .timeline {
+      position: relative;
+      padding-left: 28px;
+    }
+    /* A linha vertical da timeline */
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      bottom: 8px;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 40px;
+      padding: 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      transition: border-color 0.2s;
+    }
+    .timeline-item:hover { border-color: var(--accent); }
+
+    /* Bolinha na linha do tempo */
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -34px;
+      top: 28px;
+      width: 10px;
+      height: 10px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 12px var(--accent);
+    }
+
+    .timeline-date {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+    }
+    .timeline-role {
+      font-size: 17px;
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+    .timeline-company {
+      font-size: 13px;
+      color: var(--accent2);
+      margin-bottom: 12px;
+      font-family: var(--font-mono);
+    }
+    .timeline-desc { color: var(--muted); font-size: 14px; }
+
+    /* ══════════════════════════════════════════════════
+       HABILIDADES — Grade de cards
+    ══════════════════════════════════════════════════ */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .skill-card {
+      padding: 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+    .skill-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+    .skill-icon { font-size: 28px; margin-bottom: 10px; }
+    .skill-name {
+      font-weight: 500;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    .skill-level {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    /* ══════════════════════════════════════════════════
+       CONTATO
+    ══════════════════════════════════════════════════ */
+    .contact-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--accent);
+      padding: 48px;
+      text-align: center;
+    }
+    .contact-box p {
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto 32px;
+    }
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+    .contact-link {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .contact-link:hover { color: var(--accent); border-color: var(--accent); }
+
+    footer {
+      padding: 32px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 2px;
+    }
+
+    /* ══════════════════════════════════════════════════
+       ANIMAÇÕES DE ENTRADA
+       Cada elemento começa invisível e sobe ao aparecer.
+    ══════════════════════════════════════════════════ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-inner > * {
+      animation: fadeUp 0.7s ease both;
+    }
+    /* animation-delay escalonado = efeito cascata */
+    .hero-inner > *:nth-child(1) { animation-delay: 0.1s; }
+    .hero-inner > *:nth-child(2) { animation-delay: 0.2s; }
+    .hero-inner > *:nth-child(3) { animation-delay: 0.3s; }
+    .hero-inner > *:nth-child(4) { animation-delay: 0.4s; }
+    .hero-inner > *:nth-child(5) { animation-delay: 0.5s; }
+    .hero-inner > *:nth-child(6) { animation-delay: 0.6s; }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     HERO — Apresentação principal
+════════════════════════════════════════ -->
+<header>
+  <div class="container">
+    <div class="hero-inner">
+
+      <!-- Pequena etiqueta acima do nome -->
+      <div class="hero-tag">Disponível para projetos PJ</div>
+
+      <!-- Nome em letras grandes — primeiro impacto -->
+      <h1>GUSTAVO<br>BRITO</h1>
+
+      <!-- Especialidade em destaque colorido -->
+      <div class="hero-subtitle">HVAC ENGINEER</div>
+
+      <!-- Resumo em texto -->
+      <p class="hero-desc">
+        Engenheiro Mecânico pela UnB com <strong>15+ anos</strong> em sistemas HVAC,
+        energia solar e gestão de projetos. De data centers a hospitais,
+        entrego soluções técnicas com excelência operacional.
+      </p>
+
+      <!-- Badges de tecnologia/ferramentas -->
+      <div class="tags">
+        <span class="tag">HVAC</span>
+        <span class="tag">Energia Solar</span>
+        <span class="tag">Revit / BIM</span>
+        <span class="tag">Aurora Solar</span>
+        <span class="tag">AutoCAD</span>
+        <span class="tag">MassSave</span>
+        <span class="tag">VRF / VRV</span>
+        <span class="tag">Água Gelada</span>
+      </div>
+
+      <!-- Chamada para ação -->
+      <a href="mailto:gustavobrito@email.com" class="btn">→ Entre em contato</a>
+    </div>
+
+    <!-- Texto vertical decorativo -->
+    <div class="hero-stat">Brasília, DF — (61) 9 9985-3916</div>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════════
+     SOBRE
+════════════════════════════════════════ -->
+<section id="sobre">
+  <div class="container">
+    <div class="section-label">01 — Sobre</div>
+    <h2>QUEM SOU EU</h2>
+
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          Engenheiro Mecânico formado pela <strong>Universidade de Brasília (UnB)</strong>,
+          com carreira construída desde 2009 no setor de HVAC — de estágios em laboratório
+          até gestão de equipes e projetos internacionais.
+        </p>
+        <p>
+          Recentemente, atuei nos <strong>EUA (Massachusetts)</strong> como System Designer
+          em energia solar fotovoltaica e Coordenador Técnico HVAC, adicionando
+          fluência internacional à minha trajetória.
+        </p>
+        <p>
+          Atualmente expandindo habilidades em <strong>programação e tecnologia</strong>
+          para criar ferramentas que potencializam projetos de engenharia.
+        </p>
+      </div>
+
+      <div class="stats">
+        <div class="stat-item">
+          <div class="stat-num">15+</div>
+          <div class="stat-label">Anos de experiência</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">50+</div>
+          <div class="stat-label">Projetos entregues</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">4.000</div>
+          <div class="stat-label">TR no maior projeto (DF Century Plaza)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     EXPERIÊNCIA
+════════════════════════════════════════ -->
+<section id="experiencia">
+  <div class="container">
+    <div class="section-label">02 — Experiência</div>
+    <h2>TRAJETÓRIA</h2>
+
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-date">12/2024 – 05/2025</div>
+        <div class="timeline-role">System Designer & Coordenador Técnico HVAC</div>
+        <div class="timeline-company">EcoSave HomeSolutions — Massachusetts, USA</div>
+        <div class="timeline-desc">
+          Desenvolvimento de projetos fotovoltaicos com Aurora Solar, ScanIfly e Revit.
+          Supervisão de instalações HVAC (mini-splits, air handlers) e suporte técnico
+          para o programa MassSave.
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">07/2024 – 08/2025</div>
+        <div class="timeline-role">Engenheiro Mecânico HVAC</div>
+        <div class="timeline-company">Formiga Engenharia e Arquitetura — Brasília, DF</div>
+        <div class="timeline-desc">
+          Assessoria técnica, gerenciamento e fiscalização de infraestrutura predial
+          para unidades da Caixa Econômica Federal em Brasília e entorno.
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">01/2023 – 10/2023</div>
+        <div class="timeline-role">Designer de Projetos HVAC</div>
+        <div class="timeline-company">Tawle Projetos — Banco do Brasil</div>
+        <div class="timeline-desc">
+          Engenharia especializada para atualização das agências do Banco do Brasil
+          ao padrão visual da nova ambiência 2.0.
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">09/2020 – 09/2021</div>
+        <div class="timeline-role">Gerente de Engenharia</div>
+        <div class="timeline-company">SincMec — Brasília, DF</div>
+        <div class="timeline-desc">
+          Gerência das atividades HVAC: atendimento ao cliente, análise de projetos,
+          propostas técnicas e comerciais, compra de materiais e gestão de equipes.
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">01/2018 – 07/2018</div>
+        <div class="timeline-role">Assistente de Engenharia</div>
+        <div class="timeline-company">Eletroar Instalações Térmicas — Brasília, DF</div>
+        <div class="timeline-desc">
+          Retrofitting de sistemas de ar condicionado em hospitais de grande porte:
+          Hospital do Coração do Brasil, Santa Helena, Santa Luzia e Maternidade Brasília.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     HABILIDADES
+════════════════════════════════════════ -->
+<section id="habilidades">
+  <div class="container">
+    <div class="section-label">03 — Habilidades</div>
+    <h2>FERRAMENTAS</h2>
+
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">🏗️</div>
+        <div class="skill-name">Revit / BIM</div>
+        <div class="skill-level">Avançado</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">☀️</div>
+        <div class="skill-name">Aurora Solar</div>
+        <div class="skill-level">Avançado</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">📐</div>
+        <div class="skill-name">AutoCAD</div>
+        <div class="skill-level">Avançado</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🧊</div>
+        <div class="skill-name">SolidWorks</div>
+        <div class="skill-level">Intermediário</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">📊</div>
+        <div class="skill-name">MS Project</div>
+        <div class="skill-level">Intermediário</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🌐</div>
+        <div class="skill-name">Inglês</div>
+        <div class="skill-level">Fluente</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🔧</div>
+        <div class="skill-name">VRF / VRV</div>
+        <div class="skill-level">Especialista</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">💻</div>
+        <div class="skill-name">Lógica / Código</div>
+        <div class="skill-level">Em desenvolvimento</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     CONTATO
+════════════════════════════════════════ -->
+<section id="contato">
+  <div class="container">
+    <div class="section-label">04 — Contato</div>
+    <h2>VAMOS TRABALHAR</h2>
+
+    <div class="contact-box">
+      <p>
+        Disponível para projetos PJ em HVAC, energia solar, gestão técnica
+        e consultoria de engenharia. Brasília e remoto.
+      </p>
+      <a href="mailto:gustavobrito@email.com" class="btn">→ Enviar mensagem</a>
+      <div class="contact-links">
+        <a href="tel:+5561999853916" class="contact-link">(61) 9 9985-3916</a>
+        <a href="#" class="contact-link">LinkedIn</a>
+        <a href="#" class="contact-link">Brasília, DF</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    © 2025 Gustavo Vieira Nunes Brito — Engenheiro Mecânico — CRE/DF
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+.contactBox {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent);
+  padding: 48px;
+  text-align: center;
+}
+
+.contactBox p {
+  color: var(--muted);
+  max-width: 480px;
+  margin: 0 auto 32px;
+}
+
+.contactLinks {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.contactLink {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.contactLink:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
