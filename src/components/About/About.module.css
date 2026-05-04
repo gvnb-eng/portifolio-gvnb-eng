@@ -1,43 +1,51 @@
-.aboutGrid {
+.section {
+  background: var(--bg);
+  border-top: none;
+}
+
+.grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  gap: 80px;
   align-items: start;
 }
 
-@media (max-width: 640px) {
-  .aboutGrid {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
+@media (max-width: 768px) {
+  .grid { grid-template-columns: 1fr; gap: 48px; }
 }
 
-.aboutText p {
+.text p {
   color: var(--muted);
-  margin-bottom: 16px;
+  margin-bottom: 18px;
+  font-size: 16px;
+  line-height: 1.8;
 }
 
-.aboutText strong {
-  color: var(--text);
-}
+.text strong { color: var(--text); font-weight: 600; }
 
-.stats {
+.right {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 20px;
+  padding-top: 8px;
 }
 
-.statItem {
-  padding: 24px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--accent2);
+.statCard {
+  padding: 28px 24px;
+  background: var(--bg-alt);
+  border-left: 4px solid var(--primary);
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.statCard:hover {
+  border-color: var(--accent);
+  transform: translateX(4px);
 }
 
 .statNum {
   font-family: var(--font-head);
   font-size: 64px;
-  color: var(--accent2);
+  color: var(--primary);
   line-height: 1;
   letter-spacing: 2px;
 }
@@ -48,5 +56,5 @@
   color: var(--muted);
   letter-spacing: 3px;
   text-transform: uppercase;
-  margin-top: 4px;
+  margin-top: 6px;
 }

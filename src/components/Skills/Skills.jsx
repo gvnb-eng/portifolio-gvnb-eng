@@ -1,18 +1,23 @@
 import { skills } from '../../data/skills'
-import SectionHeader from '../shared/SectionHeader/SectionHeader'
 import styles from './Skills.module.css'
 
 export default function Skills() {
   return (
-    <section id="habilidades">
+    <section id="habilidades" className={styles.section}>
       <div className="container">
-        <SectionHeader label="03 — Habilidades" title="FERRAMENTAS" />
-        <div className={styles.skillsGrid}>
+        <div className={styles.header}>
+          <div className="section-eyebrow">03 — Habilidades</div>
+          <h2>FERRAMENTAS & EXPERTISE</h2>
+          <div className="divider" />
+        </div>
+        <div className={styles.grid}>
           {skills.map((skill) => (
-            <div key={skill.name} className={styles.skillCard}>
-              <div className={styles.skillIcon}>{skill.icon}</div>
-              <div className={styles.skillName}>{skill.name}</div>
-              <div className={styles.skillLevel}>{skill.level}</div>
+            <div key={skill.name} className={styles.card}>
+              <div className={styles.iconWrap}>
+                <span className={styles.icon}>{skill.icon}</span>
+              </div>
+              <div className={styles.name}>{skill.name}</div>
+              <div className={styles.level}>{skill.level}</div>
             </div>
           ))}
         </div>

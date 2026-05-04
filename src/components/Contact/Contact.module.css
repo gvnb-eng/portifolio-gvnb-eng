@@ -1,38 +1,121 @@
-.contactBox {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-top: 3px solid var(--accent);
-  padding: 48px;
-  text-align: center;
+.section {
+  background: var(--bg);
+  border-top: 4px solid var(--primary);
 }
 
-.contactBox p {
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 80px;
+  align-items: start;
+}
+
+@media (max-width: 800px) {
+  .grid { grid-template-columns: 1fr; gap: 48px; }
+}
+
+.desc {
   color: var(--muted);
-  max-width: 480px;
-  margin: 0 auto 32px;
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 36px;
 }
 
-.contactLinks {
+.links {
   display: flex;
-  justify-content: center;
-  gap: 24px;
-  flex-wrap: wrap;
-  margin-top: 24px;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.contactLink {
+.link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--muted);
+  font-size: 13px;
+  color: var(--text);
   text-decoration: none;
+  letter-spacing: 1px;
+  transition: color 0.2s;
+}
+.link:hover { color: var(--primary); }
+
+.linkDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+.formWrap {
+  background: var(--bg-alt);
+  padding: 40px;
+  border-top: 3px solid var(--primary);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 500px) {
+  .formRow { grid-template-columns: 1fr; }
+}
+
+.field { display: flex; flex-direction: column; gap: 6px; }
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 10px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 2px;
-  transition: color 0.2s, border-color 0.2s;
+  color: var(--muted);
 }
 
-.contactLink:hover {
-  color: var(--accent);
-  border-color: var(--accent);
+.input,
+.textarea {
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+  resize: vertical;
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: var(--primary);
+}
+
+.submit {
+  display: inline-block;
+  padding: 14px 32px;
+  background: var(--accent);
+  color: #111;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  transition: background 0.2s, transform 0.15s;
+  cursor: pointer;
+  border: none;
+}
+
+.submit:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
 }

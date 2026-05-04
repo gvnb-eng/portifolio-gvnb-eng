@@ -1,36 +1,68 @@
-.skillsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 16px;
+.section {
+  background: var(--bg-alt);
+  border-top: none;
 }
 
-.skillCard {
-  padding: 20px;
+.header {
+  margin-bottom: 16px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 20px;
+}
+
+.card {
   background: var(--surface);
   border: 1px solid var(--border);
-  transition: all 0.2s;
+  border-bottom: 3px solid var(--primary);
+  padding: 28px 20px 24px;
+  text-align: center;
+  transition: all 0.22s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-.skillCard:hover {
-  border-color: var(--accent);
-  transform: translateY(-3px);
+.card:hover {
+  border-bottom-color: var(--accent);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(122,28,28,0.12);
 }
 
-.skillIcon {
-  font-size: 28px;
-  margin-bottom: 10px;
+.iconWrap {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #f5eded;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+  transition: background 0.2s;
 }
 
-.skillName {
-  font-weight: 500;
+.card:hover .iconWrap {
+  background: var(--primary);
+}
+
+.icon {
+  font-size: 26px;
+  display: block;
+}
+
+.name {
+  font-weight: 600;
   font-size: 14px;
-  margin-bottom: 4px;
+  color: var(--text);
+  margin-bottom: 6px;
 }
 
-.skillLevel {
+.level {
   font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--accent);
+  font-size: 10px;
+  color: var(--primary);
   text-transform: uppercase;
   letter-spacing: 2px;
 }
+
+.card:hover .level { color: var(--accent); }
