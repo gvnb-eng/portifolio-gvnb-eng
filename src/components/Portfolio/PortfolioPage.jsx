@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import NavigationLink from '../NavigationLink'
 import { portfolioCases } from '../../data/portfolio'
 import styles from './PortfolioPage.module.css'
 
@@ -21,7 +21,7 @@ export default function PortfolioPage() {
           <div className={styles.kicker}>PORTFOLIO | 2012-2024</div>
           <h1>ENGENHARIA<br />EM CAMPO</h1>
           <p>Uma selecao cronologica de vivencias em obra, manutencao, vistoria, ambiente critico e levantamento tecnico em AVAC.</p>
-          <Link className={styles.backLink} to="/">Voltar para a apresentacao</Link>
+          <NavigationLink className={styles.backLink} to="/">Voltar para a apresentacao</NavigationLink>
         </div>
       </header>
 

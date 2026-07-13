@@ -1,5 +1,6 @@
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar/Navbar'
+import ScrollToLocation from './components/ScrollToLocation'
 import Hero from './components/Hero/Hero'
 import About from './components/About/About'
 import Experience from './components/Experience/Experience'
@@ -24,9 +25,13 @@ function HomePage() {
 
 export default function App() {
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/portfolio" element={<><Navbar /><PortfolioPage /><Footer /></>} />
-    </Routes>
+    <>
+      <ScrollToLocation />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/portfolio" element={<><Navbar /><PortfolioPage /><Footer /></>} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </>
   )
 }

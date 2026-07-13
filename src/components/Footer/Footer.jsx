@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom'
+import NavigationLink from '../NavigationLink'
 import styles from './Footer.module.css'
 
 const links = [
@@ -9,9 +9,6 @@ const links = [
 ]
 
 export default function Footer() {
-  const { pathname } = useLocation()
-  const homePrefix = pathname === '/' ? '' : '/'
-
   return (
     <footer className={styles.footer}>
       <div className={`container ${styles.inner}`}>
@@ -20,8 +17,8 @@ export default function Footer() {
           <span className={styles.logoSub}>Engenharia</span>
         </div>
         <nav className={styles.nav} aria-label="Navegacao do rodape">
-          {links.map((link) => <a key={link.href} href={`${homePrefix}${link.href}`} className={styles.navLink}>{link.label}</a>)}
-          <Link to="/portfolio" className={styles.navLink}>Portfolio</Link>
+          {links.map((link) => <NavigationLink key={link.href} to={`/${link.href}`} className={styles.navLink}>{link.label}</NavigationLink>)}
+          <NavigationLink to="/portfolio" className={styles.navLink}>Portfolio</NavigationLink>
         </nav>
         <div className={styles.copy}>2025 Gustavo Vieira Nunes Brito | Engenheiro Mecanico | CREA/DF</div>
       </div>

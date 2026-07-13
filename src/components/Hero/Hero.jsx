@@ -1,3 +1,4 @@
+import NavigationLink from '../NavigationLink'
 import { heroData } from '../../data/hero'
 import styles from './Hero.module.css'
 
@@ -18,8 +19,8 @@ export default function Hero() {
             {heroData.description}
           </p>
           <div className={styles.actions}>
-            <a href="#contato" className={styles.btnPrimary}>Solicitar Orçamento</a>
-            <a href="#sobre" className={styles.btnOutline}>Conheça o Trabalho</a>
+            <NavigationLink to="/#contato" className={styles.btnPrimary}>Solicitar Orçamento</NavigationLink>
+            <NavigationLink to="/#sobre" className={styles.btnOutline}>Conheça o Trabalho</NavigationLink>
           </div>
         </div>
         <div className={styles.badges}>

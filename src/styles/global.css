@@ -21,8 +21,6 @@
   padding: 0;
 }
 
-html { scroll-behavior: smooth; }
-
 body {
   background: var(--bg);
   color: var(--text);
@@ -60,6 +58,10 @@ h2.light { color: #fff; }
 
 section {
   padding: 80px 0;
+}
+
+section[id] {
+  scroll-margin-top: 84px;
 }
 
 .section-eyebrow {

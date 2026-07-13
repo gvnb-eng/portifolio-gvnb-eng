@@ -59,6 +59,7 @@
 .link:hover { color: var(--accent); }
 
 .cta {
+  display: inline-block;
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 2px;
@@ -73,11 +74,7 @@
 
 .cta:hover { background: var(--accent-hover); }
 
-.mobileCta { display: none; }
-
 @media (max-width: 700px) {
   .links { display: none; }
-  .desktopCta { display: none; }
-  .mobileCta { display: inline-block; }
   .logoText { display: none; }
 }

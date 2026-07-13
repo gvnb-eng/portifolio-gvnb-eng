@@ -1,4 +1,5 @@
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
+import NavigationLink from '../NavigationLink'
 import styles from './Navbar.module.css'
 
 const links = [
@@ -6,37 +7,29 @@ const links = [
   { label: 'Experiencia', href: '#experiencia' },
   { label: 'Habilidades', href: '#habilidades' },
   { label: 'Contato', href: '#contato' },
-  { label: 'Portfolio', href: '/portfolio' },
 ]
 
 export default function Navbar() {
   const { pathname } = useLocation()
-  const homePrefix = pathname === '/' ? '' : '/'
+  const isPortfolio = pathname === '/portfolio'
 
   return (
     <nav className={styles.navbar} aria-label="Navegacao principal">
       <div className={`container ${styles.inner}`}>
-        <Link to="/" className={styles.logo}>
+        <NavigationLink to="/" className={styles.logo}>
           <span className={styles.logoMark}>GVNB</span>
           <span className={styles.logoText}>Engenharia</span>
-        </Link>
+        </NavigationLink>
         <ul className={styles.links}>
           {links.map((link) => (
             <li key={link.href}>
-              {link.href === '/portfolio' ? (
-                <Link to={link.href} className={styles.link}>{link.label}</Link>
-              ) : (
-                <a href={`${homePrefix}${link.href}`} className={styles.link}>{link.label}</a>
-              )}
+              <NavigationLink to={`/${link.href}`} className={styles.link}>{link.label}</NavigationLink>
             </li>
           ))}
         </ul>
-        <a href={`${homePrefix}#contato`} className={`${styles.cta} ${styles.desktopCta}`}>Fale Conosco</a>
-        {pathname === '/portfolio' ? (
-          <a href="/#contato" className={`${styles.cta} ${styles.mobileCta}`}>Contato</a>
-        ) : (
-          <Link to="/portfolio" className={`${styles.cta} ${styles.mobileCta}`}>Portfolio</Link>
-        )}
+        <NavigationLink to={isPortfolio ? '/' : '/portfolio'} className={styles.cta}>
+          {isPortfolio ? 'Inicio' : 'Portfolio'}
+        </NavigationLink>
       </div>
     </nav>
   )
