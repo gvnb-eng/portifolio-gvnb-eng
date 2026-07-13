@@ -4,7 +4,7 @@
   font-size: 13px;
   padding: 14px 28px;
   background: var(--accent);
-  color: #000;
+  color: #081010;
   font-weight: 500;
   text-decoration: none;
   letter-spacing: 2px;
@@ -13,6 +13,6 @@
 }
 
 .btn:hover {
-  background: #00dfc0;
+  background: var(--accent-hover);
   transform: translateY(-2px);
 }

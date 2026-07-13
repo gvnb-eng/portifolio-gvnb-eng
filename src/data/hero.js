@@ -1,10 +1,10 @@
 export const heroData = {
-  tag: 'Disponível para projetos PJ',
+  tag: 'Atuação técnica em AVAC',
   name: 'GUSTAVO\nBRITO',
   subtitle: 'HVAC ENGINEER',
-  description: 'Engenheiro Mecânico pela UnB com 15+ anos em sistemas HVAC, energia solar e gestão de projetos. De data centers a hospitais, entrego soluções técnicas com excelência operacional.',
+  description: 'Engenheiro Mecânico pela UnB com mais de 15 anos em AVAC, projetos, vistorias e infraestrutura técnica.',
   descriptionHighlight: '15+ anos',
   tags: ['HVAC', 'Energia Solar', 'Revit / BIM', 'Aurora Solar', 'AutoCAD', 'MassSave', 'VRF / VRV', 'Água Gelada'],
-  cta: { label: '→ Entre em contato', href: 'mailto:gvnb.eng@gmail.com' },
-  rotatedStat: 'Brasília, DF — (61) 9 9985-3916',
+  cta: { label: 'Entre em contato', href: '#contato' },
+  rotatedStat: 'Consultoria técnica e projetos',
 }

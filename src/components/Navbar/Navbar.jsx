@@ -1,28 +1,42 @@
+import { Link, useLocation } from 'react-router-dom'
 import styles from './Navbar.module.css'
 
 const links = [
-  { label: 'Sobre',       href: '#sobre' },
-  { label: 'Experiência', href: '#experiencia' },
+  { label: 'Sobre', href: '#sobre' },
+  { label: 'Experiencia', href: '#experiencia' },
   { label: 'Habilidades', href: '#habilidades' },
-  { label: 'Contato',     href: '#contato' },
+  { label: 'Contato', href: '#contato' },
+  { label: 'Portfolio', href: '/portfolio' },
 ]
 
 export default function Navbar() {
+  const { pathname } = useLocation()
+  const homePrefix = pathname === '/' ? '' : '/'
+
   return (
-    <nav className={styles.navbar}>
+    <nav className={styles.navbar} aria-label="Navegacao principal">
       <div className={`container ${styles.inner}`}>
-        <a href="#" className={styles.logo}>
+        <Link to="/" className={styles.logo}>
           <span className={styles.logoMark}>GVNB</span>
           <span className={styles.logoText}>Engenharia</span>
-        </a>
+        </Link>
         <ul className={styles.links}>
-          {links.map((l) => (
-            <li key={l.href}>
-              <a href={l.href} className={styles.link}>{l.label}</a>
+          {links.map((link) => (
+            <li key={link.href}>
+              {link.href === '/portfolio' ? (
+                <Link to={link.href} className={styles.link}>{link.label}</Link>
+              ) : (
+                <a href={`${homePrefix}${link.href}`} className={styles.link}>{link.label}</a>
+              )}
             </li>
           ))}
         </ul>
-        <a href="#contato" className={styles.cta}>Fale Conosco</a>
+        <a href={`${homePrefix}#contato`} className={`${styles.cta} ${styles.desktopCta}`}>Fale Conosco</a>
+        {pathname === '/portfolio' ? (
+          <a href="/#contato" className={`${styles.cta} ${styles.mobileCta}`}>Contato</a>
+        ) : (
+          <Link to="/portfolio" className={`${styles.cta} ${styles.mobileCta}`}>Portfolio</Link>
+        )}
       </div>
     </nav>
   )

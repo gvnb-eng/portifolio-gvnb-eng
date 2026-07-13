@@ -4,7 +4,7 @@
   left: 0;
   right: 0;
   z-index: 100;
-  background: #111;
+  background: #081010;
   border-bottom: 3px solid var(--primary);
 }
 
@@ -35,7 +35,7 @@
 .logoText {
   font-family: var(--font-mono);
   font-size: 11px;
-  color: #aaa;
+  color: #b8e8f8;
   letter-spacing: 3px;
   text-transform: uppercase;
 }
@@ -49,7 +49,7 @@
 .link {
   font-family: var(--font-mono);
   font-size: 11px;
-  color: #ccc;
+  color: #c8e8f8;
   text-decoration: none;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -66,13 +66,18 @@
   text-decoration: none;
   padding: 10px 20px;
   background: var(--accent);
-  color: #111;
+  color: #081010;
   font-weight: 600;
   transition: background 0.2s;
 }
 
 .cta:hover { background: var(--accent-hover); }
 
+.mobileCta { display: none; }
+
 @media (max-width: 700px) {
   .links { display: none; }
+  .desktopCta { display: none; }
+  .mobileCta { display: inline-block; }
+  .logoText { display: none; }
 }

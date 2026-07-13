@@ -1,15 +1,15 @@
 :root {
-  --primary:       #7a1c1c;
-  --primary-dark:  #5c1515;
-  --primary-hover: #9b2525;
-  --accent:        #c9a227;
-  --accent-hover:  #e0b82d;
+  --primary:       #00779f;
+  --primary-dark:  #081010;
+  --primary-hover: #008bb8;
+  --accent:        #b0d840;
+  --accent-hover:  #d0e898;
   --bg:            #ffffff;
-  --bg-alt:        #f5f0eb;
+  --bg-alt:        #f8fbfa;
   --surface:       #ffffff;
-  --border:        #e0d6cc;
-  --text:          #1e1e1e;
-  --muted:         #6b6b6b;
+  --border:        #d9e6e4;
+  --text:          #203030;
+  --muted:         #5f6f70;
   --font-head:     'Bebas Neue', sans-serif;
   --font-body:     'DM Sans', sans-serif;
   --font-mono:     'DM Mono', monospace;
