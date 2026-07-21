@@ -1,21 +1,24 @@
-import { experiences } from '../../data/experience'
+import { experienceData } from '../../data/experience'
+import { useLanguage } from '../../i18n/LanguageContext'
 import styles from './Experience.module.css'
 
 export default function Experience() {
+  const { language } = useLanguage()
+  const data = experienceData[language]
+
   return (
     <section id="experiencia" className={styles.section}>
       <div className="container">
         <div className={styles.header}>
-          <div className="section-eyebrow">02 — Experiência</div>
-          <h2 className="light">TRAJETÓRIA</h2>
+          <div className="section-eyebrow">{data.eyebrow}</div>
+          <h2 className="light">{data.title}</h2>
           <div className={`divider ${styles.dividerGold}`} />
           <p className={styles.subtitle}>
-            Mais de 15 anos construindo soluções técnicas de alto padrão em HVAC,
-            energia solar e gestão de projetos no Brasil e nos EUA.
+            {data.subtitle}
           </p>
         </div>
         <div className={styles.grid}>
-          {experiences.map((exp, i) => (
+          {data.items.map((exp, i) => (
             <div key={i} className={styles.card}>
               <div className={styles.cardDate}>{exp.date}</div>
               <div className={styles.cardRole}>{exp.role}</div>

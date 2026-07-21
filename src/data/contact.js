@@ -1,7 +1,36 @@
 export const contactData = {
-  description: 'Canal de contato em revisão. Informações de atendimento serão disponibilizadas em breve.',
-  cta: { label: 'Contato sob revisão', href: '#contato' },
-  links: [
-    { label: 'Atendimento técnico sob revisão', href: '#contato' },
-  ],
+  pt: {
+    eyebrow: '04 — Contato',
+    title: 'VAMOS TRABALHAR JUNTOS',
+    description: 'Canal de contato em revisão. Informações de atendimento serão disponibilizadas em breve.',
+    links: [{ label: 'Atendimento técnico sob revisão', href: '#contato' }],
+    fields: {
+      name: 'Nome',
+      namePlaceholder: 'Seu nome',
+      email: 'E-mail',
+      emailPlaceholder: 'seu@email.com',
+      subject: 'Assunto',
+      subjectPlaceholder: 'Projeto HVAC, consultoria...',
+      message: 'Mensagem',
+      messagePlaceholder: 'Descreva o projeto ou dúvida...',
+    },
+    cta: { label: 'Contato sob revisão', href: '#contato' },
+  },
+  en: {
+    eyebrow: '04 — Contact',
+    title: 'LET\'S WORK TOGETHER',
+    description: 'The contact channel is under review. Service information will be available soon.',
+    links: [{ label: 'Technical inquiries under review', href: '#contato' }],
+    fields: {
+      name: 'Name',
+      namePlaceholder: 'Your name',
+      email: 'Email',
+      emailPlaceholder: 'your@email.com',
+      subject: 'Subject',
+      subjectPlaceholder: 'HVAC project, consulting...',
+      message: 'Message',
+      messagePlaceholder: 'Describe your project or question...',
+    },
+    cta: { label: 'Contact under review', href: '#contato' },
+  },
 }

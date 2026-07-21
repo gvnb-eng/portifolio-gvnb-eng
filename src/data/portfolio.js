@@ -1,4 +1,6 @@
-const sequenceStarts = [44, 37, 27, 17, 8, 1]
+import { portfolioTranslationsEn } from './portfolioTranslationsEn.js'
+
+const sequenceStarts = [65, 59, 53, 44, 37, 27, 17, 8, 1]
 
 const photo = (number, dateLabel, caption) => {
   const sequenceStart = sequenceStarts.find((start) => number >= start)
@@ -13,7 +15,7 @@ const photo = (number, dateLabel, caption) => {
 export const portfolioCases = [
   {
     id: 'at-engenharia',
-    period: '2012-2014',
+    period: '2012-jul. 2014',
     dateRange: '23-24 JUL 2012',
     company: 'AT Engenharia',
     project: 'Obras de instalações prediais',
@@ -31,6 +33,68 @@ export const portfolioCases = [
       photo(5, '24 JUL 2012', 'Distribuição das redes e leitura conjunta das interferências.'),
       photo(6, '24 JUL 2012', 'Continuidade da infraestrutura junto à alvenaria.'),
       photo(7, '24 JUL 2012', 'Vista geral da frente de serviço e das rotas instaladas.'),
+    ],
+  },
+  {
+    id: 'praca-capital',
+    period: '2014',
+    dateRange: 'AGO-DEZ 2014',
+    company: 'AT Engenharia',
+    project: 'Praça Capital — Odebrecht / Brasal',
+    role: 'Orçamentista',
+    layout: 'systems',
+    featuredSequence: 3,
+    context: 'Transição do acompanhamento de obras para a atuação como Orçamentista na AT Engenharia, com análise de projetos de AVAC para um empreendimento dividido em cinco blocos.',
+    activity: 'Levantamentos em AutoCAD, quantitativos de dutos e rede frigorígena, comparação de equipamentos, consultas a fornecedores e apoio à composição de custos e da proposta técnica.',
+    evidence: 'A sequência registra o trabalho em desenho e planilha, a leitura de especificações e a conferência de pranchas durante o desenvolvimento das revisões R00 e R01.',
+    images: [
+      photo(53, '24 SET 2014', 'Análise de especificação técnica para seleção de equipamento de exaustão.'),
+      photo(54, '16 OUT 2014', 'Posto de trabalho dedicado ao levantamento de projetos e quantitativos.'),
+      photo(55, '16 OUT 2014', 'Leitura de desenho em AutoCAD com planilha de levantamento aberta em paralelo.'),
+      photo(56, '16 OUT 2014', 'Conferência de dimensões e trechos da rede de dutos no projeto.'),
+      photo(57, '16 OUT 2014', 'Continuidade do levantamento técnico em desenho e planilha.'),
+      photo(58, '05 DEZ 2014', 'Impressão de pranchas para conferência do projeto e dos quantitativos.'),
+    ],
+  },
+  {
+    id: 'centro-empresarial-varig',
+    period: '2015',
+    dateRange: 'JAN-MAR 2015',
+    company: 'Colaboração com a AT Engenharia',
+    project: 'Centro Empresarial Varig',
+    role: 'Levantamento técnico e carga térmica',
+    layout: 'field',
+    featuredSequence: 4,
+    context: 'Colaboração técnica pontual mantida após o encerramento do vínculo formal, voltada ao estudo de modernização do sistema de ar-condicionado central do empreendimento.',
+    activity: 'Visitas técnicas, inventário de chillers, bombas, torres e fan-coils, definição de pontos de medição, análise da instalação existente e desenvolvimento do levantamento de carga térmica.',
+    evidence: 'Os registros de campo documentam as condições encontradas e se conectam às planilhas de equipamentos, medições e carga térmica desenvolvidas para o estudo.',
+    images: [
+      photo(59, '26 JAN 2015', 'Abertura do isolamento para avaliação da condição da tubulação existente.'),
+      photo(60, '26 JAN 2015', 'Inspeção das conexões e componentes internos de unidade instalada.'),
+      photo(61, '26 JAN 2015', 'Verificação construtiva das camadas de isolamento da rede.'),
+      photo(62, '26 JAN 2015', 'Levantamento das interferências entre tubulações e infraestrutura do pavimento.'),
+      photo(63, '26 JAN 2015', 'Condição interna de unidade examinada durante a visita técnica.'),
+      photo(64, '26 JAN 2015', 'Registro de equipamento e conexões para composição do inventário técnico.'),
+    ],
+  },
+  {
+    id: 'geolab-daia',
+    period: '2015',
+    dateRange: '04-13 MAR 2015',
+    company: 'Colaboração com a AT Engenharia',
+    project: 'CC Exército / Geolab — DAIA, Anápolis',
+    role: 'Orçamentista — demanda pontual',
+    layout: 'sequence',
+    featuredSequence: 1,
+    context: 'Demanda pontual de orçamento desenvolvida em colaboração com a AT Engenharia para instalações de climatização e ventilação no complexo industrial.',
+    activity: 'Visita de campo, levantamento de dutos, bocas de ar e rede frigorígena, especificação de equipamentos, consultas a fornecedores e estruturação do orçamento AT 014-15.',
+    evidence: 'As imagens da visita antecedem a sequência documental de levantamentos, cotações, planilha de custos e consolidação da proposta pela equipe da AT Engenharia.',
+    images: [
+      photo(65, '04 MAR 2015', 'Conjunto externo de equipamentos e redes de ventilação levantado em campo.'),
+      photo(66, '04 MAR 2015', 'Reconhecimento das instalações e da distribuição de ar no galpão.'),
+      photo(67, '04 MAR 2015', 'Leitura das condições internas e dos percursos possíveis para as redes.'),
+      photo(68, '04 MAR 2015', 'Inspeção da infraestrutura elevada para definição do escopo do orçamento.'),
+      photo(69, '04 MAR 2015', 'Vista geral da edificação e do estágio da obra durante o levantamento.'),
     ],
   },
   {
@@ -154,3 +218,18 @@ export const portfolioCases = [
     ],
   },
 ]
+
+export const portfolioCasesByLanguage = {
+  pt: portfolioCases,
+  en: portfolioCases.map((entry) => {
+    const translation = portfolioTranslationsEn[entry.id]
+    return {
+      ...entry,
+      ...translation,
+      images: entry.images.map((image, index) => ({
+        ...image,
+        ...translation.images[index],
+      })),
+    }
+  }),
+}

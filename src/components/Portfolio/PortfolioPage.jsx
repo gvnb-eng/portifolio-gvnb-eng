@@ -1,16 +1,60 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 import NavigationLink from '../NavigationLink'
-import { portfolioCases } from '../../data/portfolio'
+import { portfolioCasesByLanguage } from '../../data/portfolio'
+import { useLanguage } from '../../i18n/LanguageContext'
 import styles from './PortfolioPage.module.css'
 
-function PhotoButton({ entry, image, imageIndex, featured = false, onOpen }) {
+const pageContent = {
+  pt: {
+    enlarge: 'Ampliar imagem',
+    kicker: 'PORTFÓLIO | 2012-2024',
+    title: <>ENGENHARIA<br />EM CAMPO</>,
+    description: 'Uma trajetória visual de instalações, manutenção, vistoria, ambiente crítico e levantamento técnico em AVAC.',
+    back: 'Voltar para a apresentação',
+    periods: 'Períodos apresentados',
+    journey: 'Trajetória profissional em imagens',
+    index: 'Índice cronológico do portfólio',
+    indexTitle: 'TRAJETÓRIA VISUAL',
+    context: 'Contexto',
+    activity: 'Atuação',
+    evidence: 'Evidência',
+    photoOf: 'Foto de',
+    close: 'Fechar foto',
+    previous: 'Foto anterior',
+    next: 'Próxima foto',
+    image: 'Imagem',
+    of: 'de',
+  },
+  en: {
+    enlarge: 'Enlarge image',
+    kicker: 'PORTFOLIO | 2012-2024',
+    title: <>ENGINEERING<br />IN THE FIELD</>,
+    description: 'A visual career timeline across HVAC installations, maintenance, inspections, critical environments and technical surveys.',
+    back: 'Back to profile',
+    periods: 'Periods shown',
+    journey: 'Professional journey in images',
+    index: 'Chronological portfolio index',
+    indexTitle: 'VISUAL TIMELINE',
+    context: 'Context',
+    activity: 'Role',
+    evidence: 'Evidence',
+    photoOf: 'Photo from',
+    close: 'Close photo',
+    previous: 'Previous photo',
+    next: 'Next photo',
+    image: 'Image',
+    of: 'of',
+  },
+}
+
+function PhotoButton({ entry, image, imageIndex, featured = false, onOpen, text }) {
   return (
     <button
       className={`${styles.photoButton} ${featured ? styles.featuredPhoto : ''}`}
       onClick={(event) => onOpen(event.currentTarget, imageIndex)}
       type="button"
-      aria-label={`Ampliar imagem ${image.sequence} de ${entry.project}: ${image.caption}`}
+      aria-label={`${text.enlarge} ${image.sequence} ${text.of} ${entry.project}: ${image.caption}`}
     >
       <span className={styles.photoViewport}>
         <img
@@ -28,7 +72,7 @@ function PhotoButton({ entry, image, imageIndex, featured = false, onOpen }) {
   )
 }
 
-function CaseStudy({ entry, caseIndex, onOpen }) {
+function CaseStudy({ entry, caseIndex, onOpen, text }) {
   const articleRef = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
 
@@ -81,13 +125,14 @@ function CaseStudy({ entry, caseIndex, onOpen }) {
           image={featuredImage}
           imageIndex={featuredIndex}
           featured
+          text={text}
           onOpen={(trigger, imageIndex) => onOpen(trigger, caseIndex, imageIndex)}
         />
         <div className={styles.caseNarrative}>
           <div className={styles.dateRange}>{entry.dateRange}</div>
-          <p><strong>Contexto</strong>{entry.context}</p>
-          <p><strong>Atuação</strong>{entry.activity}</p>
-          <p><strong>Evidência</strong>{entry.evidence}</p>
+          <p><strong>{text.context}</strong>{entry.context}</p>
+          <p><strong>{text.activity}</strong>{entry.activity}</p>
+          <p><strong>{text.evidence}</strong>{entry.evidence}</p>
         </div>
       </div>
 
@@ -100,6 +145,7 @@ function CaseStudy({ entry, caseIndex, onOpen }) {
               image={image}
               imageIndex={imageIndex}
               key={image.src}
+              text={text}
               onOpen={(trigger, selectedIndex) => onOpen(trigger, caseIndex, selectedIndex)}
             />
           )
@@ -110,6 +156,9 @@ function CaseStudy({ entry, caseIndex, onOpen }) {
 }
 
 export default function PortfolioPage() {
+  const { language } = useLanguage()
+  const portfolioCases = portfolioCasesByLanguage[language]
+  const text = pageContent[language]
   const [activeImage, setActiveImage] = useState(null)
   const lastTriggerRef = useRef(null)
   const closeButtonRef = useRef(null)
@@ -129,7 +178,7 @@ export default function PortfolioPage() {
         imageIndex: (current.imageIndex + direction + imageCount) % imageCount,
       }
     })
-  }, [])
+  }, [portfolioCases])
 
   const openImage = (trigger, caseIndex, imageIndex) => {
     lastTriggerRef.current = trigger
@@ -165,21 +214,21 @@ export default function PortfolioPage() {
       <header className={styles.intro}>
         <div className={`container ${styles.introInner}`}>
           <div className={styles.introCopy}>
-            <div className={styles.kicker}>PORTFÓLIO | 2012-2024</div>
-            <h1>ENGENHARIA<br />EM CAMPO</h1>
-            <p>Uma trajetória visual de instalações, manutenção, vistoria, ambiente crítico e levantamento técnico em AVAC.</p>
-            <NavigationLink className={styles.backLink} to="/">Voltar para a apresentação</NavigationLink>
+            <div className={styles.kicker}>{text.kicker}</div>
+            <h1>{text.title}</h1>
+            <p>{text.description}</p>
+            <NavigationLink className={styles.backLink} to="/">{text.back}</NavigationLink>
           </div>
-          <div className={styles.yearTrail} aria-label="Períodos apresentados">
+          <div className={styles.yearTrail} aria-label={text.periods}>
             {portfolioCases.map((entry) => <span key={entry.id}>{entry.period}</span>)}
           </div>
         </div>
       </header>
 
-      <section className={styles.portfolioBody} aria-label="Trajetória profissional em imagens">
+      <section className={styles.portfolioBody} aria-label={text.journey}>
         <div className={`container ${styles.portfolioShell}`}>
-          <nav className={styles.chapterIndex} aria-label="Índice cronológico do portfólio">
-            <div className={styles.chapterTitle}>TRAJETÓRIA VISUAL</div>
+          <nav className={styles.chapterIndex} aria-label={text.index}>
+            <div className={styles.chapterTitle}>{text.indexTitle}</div>
             <div className={styles.chapterLinks}>
               {portfolioCases.map((entry, index) => (
                 <NavigationLink key={entry.id} to={`/portfolio#${entry.id}`} className={styles.chapterLink}>
@@ -193,7 +242,7 @@ export default function PortfolioPage() {
 
           <div className={styles.cases}>
             {portfolioCases.map((entry, caseIndex) => (
-              <CaseStudy entry={entry} caseIndex={caseIndex} key={entry.id} onOpen={openImage} />
+              <CaseStudy entry={entry} caseIndex={caseIndex} key={entry.id} onOpen={openImage} text={text} />
             ))}
           </div>
         </div>
@@ -204,20 +253,20 @@ export default function PortfolioPage() {
           className={styles.lightbox}
           role="dialog"
           aria-modal="true"
-          aria-label={`Foto de ${activeEntry.project}`}
+          aria-label={`${text.photoOf} ${activeEntry.project}`}
           onClick={closeLightbox}
         >
           <button
             ref={closeButtonRef}
             className={styles.closeButton}
             type="button"
-            aria-label="Fechar foto"
+            aria-label={text.close}
             onClick={closeLightbox}
           >
             <X aria-hidden="true" />
           </button>
           <div className={styles.lightboxContent} onClick={(event) => event.stopPropagation()}>
-            <button className={`${styles.lightboxArrow} ${styles.lightboxPrevious}`} type="button" aria-label="Foto anterior" onClick={() => moveImage(-1)}>
+            <button className={`${styles.lightboxArrow} ${styles.lightboxPrevious}`} type="button" aria-label={text.previous} onClick={() => moveImage(-1)}>
               <ChevronLeft aria-hidden="true" />
             </button>
             <figure className={styles.lightboxFigure}>
@@ -225,10 +274,10 @@ export default function PortfolioPage() {
               <figcaption aria-live="polite">
                 <span>{activePhoto.dateLabel} | {activeEntry.company}</span>
                 <strong>{activePhoto.caption}</strong>
-                <small>Imagem {activeImage.imageIndex + 1} de {activeEntry.images.length}</small>
+                <small>{text.image} {activeImage.imageIndex + 1} {text.of} {activeEntry.images.length}</small>
               </figcaption>
             </figure>
-            <button className={`${styles.lightboxArrow} ${styles.lightboxNext}`} type="button" aria-label="Próxima foto" onClick={() => moveImage(1)}>
+            <button className={`${styles.lightboxArrow} ${styles.lightboxNext}`} type="button" aria-label={text.next} onClick={() => moveImage(1)}>
               <ChevronRight aria-hidden="true" />
             </button>
           </div>
