@@ -7,16 +7,16 @@ import styles from './Navbar.module.css'
 
 const content = {
   pt: {
-    navLabel: 'Navegação principal',
+    navLabel: 'Navegacao principal',
     brand: 'Engenharia',
     links: [
       { label: 'Sobre', href: '#sobre' },
-      { label: 'Experiência', href: '#experiencia' },
+      { label: 'Experiencia', href: '#experiencia' },
       { label: 'Habilidades', href: '#habilidades' },
       { label: 'Contato', href: '#contato' },
     ],
-    portfolio: 'Portfólio',
-    home: 'Início',
+    portfolio: 'Portfolio',
+    home: 'Inicio',
     openMenu: 'Abrir menu',
     closeMenu: 'Fechar menu',
     languageLabel: 'Switch to English',

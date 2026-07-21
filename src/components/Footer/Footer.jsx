@@ -5,15 +5,15 @@ import styles from './Footer.module.css'
 const content = {
   pt: {
     brand: 'Engenharia',
-    navLabel: 'Navegação do rodapé',
+    navLabel: 'Navegacao do rodape',
     links: [
       { label: 'Sobre', href: '#sobre' },
-      { label: 'Experiência', href: '#experiencia' },
+      { label: 'Experiencia', href: '#experiencia' },
       { label: 'Habilidades', href: '#habilidades' },
       { label: 'Contato', href: '#contato' },
     ],
-    portfolio: 'Portfólio',
-    profession: 'Engenheiro Mecânico',
+    portfolio: 'Portfolio',
+    profession: 'Engenheiro Mecanico',
   },
   en: {
     brand: 'Engineering',
