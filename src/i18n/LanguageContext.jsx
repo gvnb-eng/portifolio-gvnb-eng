@@ -8,7 +8,9 @@ function getInitialLanguage() {
   if (supportedLanguages.has(queryLanguage)) return queryLanguage
 
   const storedLanguage = window.localStorage.getItem('gvnb-language')
-  return supportedLanguages.has(storedLanguage) ? storedLanguage : 'pt'
+  if (supportedLanguages.has(storedLanguage)) return storedLanguage
+
+  return window.navigator.language.toLowerCase().startsWith('pt') ? 'pt' : 'en'
 }
 
 export function LanguageProvider({ children }) {
@@ -22,9 +24,10 @@ export function LanguageProvider({ children }) {
     window.localStorage.setItem('gvnb-language', language)
 
     const url = new URL(window.location.href)
-    if (language === 'en') url.searchParams.set('lang', 'en')
-    else url.searchParams.delete('lang')
-    window.history.replaceState(window.history.state, '', `${url.pathname}${url.search}${url.hash}`)
+    if (url.searchParams.has('lang')) {
+      url.searchParams.delete('lang')
+      window.history.replaceState(window.history.state, '', `${url.pathname}${url.search}${url.hash}`)
+    }
   }, [language])
 
   const value = useMemo(() => ({
